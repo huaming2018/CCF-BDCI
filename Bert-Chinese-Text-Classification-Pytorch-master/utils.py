@@ -14,7 +14,7 @@ def build_dataset(config):
         f = pd.read_csv(path, engine="python", encoding="utf_8_sig")
         # with open(path, 'r', encoding='UTF-8') as f:
         for i in tqdm(range(f.shape[0])):
-            content, label = f.iloc[i][0], f.iloc[i][1]
+            content, label = f.iloc[i][1], f.iloc[i][0]
             if not isinstance(content, Iterable):
                 print(content)
                 continue
