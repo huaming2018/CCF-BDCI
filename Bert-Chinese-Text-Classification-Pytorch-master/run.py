@@ -7,6 +7,7 @@ from importlib import import_module
 import argparse
 from utils import build_dataset, build_iterator, get_time_dif
 import pandas as pd
+import random
 
 parser = argparse.ArgumentParser(description='Chinese Text Classification')
 parser.add_argument('--model', type=str, required=True, help='choose a model: Bert, ERNIE')
@@ -43,6 +44,8 @@ if __name__ == '__main__':
     select_from_data_neg['class_label'] = select_from_data_neg['class_label'].apply(lambda x: 0)
     # 合并数据集
     data_merge = pd.merge(select_from_data_train, select_from_data_neg, how="outer")
+    # 打乱数据
+    random.shuffle(data_merge)
     data_merge = data_merge.reset_index(drop=True)
 
     # 切分数据集
