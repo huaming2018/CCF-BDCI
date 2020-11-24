@@ -50,8 +50,8 @@ if __name__ == '__main__':
     train_set = data_merge.loc[:data_merge.shape[0] * 0.8]
     dev_set = data_merge.loc[data_merge.shape[0] * 0.8:]
     # 将数据保存到模型定义好的路径里面去
-    train_set.to_csv('THUCNews/data/train.csv', index=False)
-    dev_set.to_csv('THUCNews/data/dev.csv', index=False)
+    train_set.to_csv('THUCNews/data/train.csv', index=False, header=False)
+    dev_set.to_csv('THUCNews/data/dev.csv', index=False, header=False)
     # train_data, dev_data, test_data = build_dataset(config)
     train_data, dev_data = build_dataset(config)
     train_iter = build_iterator(train_data, config)
