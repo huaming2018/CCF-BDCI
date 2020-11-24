@@ -63,4 +63,4 @@ if __name__ == '__main__':
     # train
     model = x.Model(config).to(config.device)
     # train(config, model, train_iter, dev_iter, test_iter)
-    train(config, model, train_iter, dev_iter, save_path="THUCNews/saved_dict/"+ config.model_name + '.ckpt')
+    train(config, model, train_iter, dev_iter, save_path="THUCNews/saved_dict/"+ model_name + '.ckpt')
