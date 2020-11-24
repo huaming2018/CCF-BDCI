@@ -33,10 +33,14 @@ if __name__ == '__main__':
     data_train = pd.read_csv('THUCNews/data/data_train.csv', engine="python", encoding="utf_8_sig")
     # 选出要训练的正样本
     select_from_data_train = data_train[data_train['class_label'] == 0]
+    # 将正样本的标签刷成1
+    select_from_data_train['class_label'] = select_from_data_train['class_label'].apply(lambda x:1)
     # 读取负样本数据集
     data_neg = pd.read_csv('THUCNews/data/data_neg.csv', engine="python", encoding="utf_8_sig")
     # 选取和正样本数量一致的负样本
     select_from_data_neg = data_neg.sample(select_from_data_train.shape[0])
+    # 将负样本的标签刷成0
+    select_from_data_neg['class_label'] = select_from_data_neg['class_label'].apply(lambda x: 0)
     # 合并数据集
     data_merge = pd.merge(select_from_data_train, select_from_data_neg, how="outer")
     data_merge = data_merge.reset_index(drop=True)
