@@ -28,7 +28,7 @@ def init_network(model, method='xavier', exclude='embedding', seed=123):
                 pass
 
 
-def train(config, model, train_iter, dev_iter, test_iter):
+def train(config, model, train_iter, dev_iter, save_path):
     start_time = time.time()
     model.train()
     param_optimizer = list(model.named_parameters())
@@ -62,7 +62,9 @@ def train(config, model, train_iter, dev_iter, test_iter):
                 dev_acc, dev_loss = evaluate(config, model, dev_iter)
                 if dev_loss < dev_best_loss:
                     dev_best_loss = dev_loss
-                    torch.save(model.state_dict(), config.save_path)
+                    # torch.save(model.state_dict(), config.save_path)
+                    # 将模型保存到我们想要的位置 主要是标签要打好
+                    torch.save(model.state_dict(), save_path)
                     improve = '*'
                     last_improve = total_batch
                 else:
@@ -79,7 +81,7 @@ def train(config, model, train_iter, dev_iter, test_iter):
                 break
         if flag:
             break
-    test(config, model, test_iter)
+    # test(config, model, test_iter)
 
 
 def test(config, model, test_iter):
