@@ -32,7 +32,7 @@ if __name__ == '__main__':
     # 读取有标签数据
     data_train = pd.read_csv('THUCNews/data/data_train.csv', engine="python", encoding="utf_8_sig")
     # 选出要训练的正样本
-    select_from_data_train = data_train[data_train['class_label'] == 0]
+    select_from_data_train = data_train[data_train['class_label'] == 2]
     # 将正样本的标签刷成1
     select_from_data_train['class_label'] = select_from_data_train['class_label'].apply(lambda x:1)
     # 读取负样本数据集
