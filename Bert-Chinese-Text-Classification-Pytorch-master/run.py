@@ -27,12 +27,11 @@ if __name__ == '__main__':
     start_time = time.time()
     print("Loading data...")
     # 从原始数据集合中切分好train 和 dev 数据可以不同
-    # 家居
 
     # 读取有标签数据
     data_train = pd.read_csv('THUCNews/data/data_train.csv', engine="python", encoding="utf_8_sig")
     # 选出要训练的正样本
-    select_from_data_train = data_train[data_train['class_label'] == 9]
+    select_from_data_train = data_train[data_train['class_label'] == 0]
     # 将正样本的标签刷成1
     select_from_data_train['class_label'] = select_from_data_train['class_label'].apply(lambda x:1)
     # 读取负样本数据集
@@ -47,8 +46,8 @@ if __name__ == '__main__':
     data_merge = data_merge.sample(frac=1).reset_index(drop=True)
 
     # 切分数据集
-    train_set = data_merge.loc[:data_merge.shape[0] * 0.8]
-    dev_set = data_merge.loc[data_merge.shape[0] * 0.8:]
+    train_set = data_merge.loc[:int(data_merge.shape[0] * 0.8)]
+    dev_set = data_merge.loc[int(data_merge.shape[0] * 0.8):]
     # 将数据保存到模型定义好的路径里面去
     train_set.to_csv('THUCNews/data/train.csv', index=False, header=False)
     dev_set.to_csv('THUCNews/data/dev.csv', index=False, header=False)
